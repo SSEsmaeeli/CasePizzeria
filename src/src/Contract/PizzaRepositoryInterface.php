@@ -6,5 +6,5 @@ namespace App\Contract;
 
 interface PizzaRepositoryInterface
 {
-    public function get();
+    public function get(): array;
 }
