@@ -1,3 +1,9 @@
-index:
+order_index:
     path: /
     controller: App\Controller\OrderController::index
+    methods:    GET|HEAD
+
+order_store:
+    path: /
+    controller: App\Controller\OrderController::store
+    methods:    POST

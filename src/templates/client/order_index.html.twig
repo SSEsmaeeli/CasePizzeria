@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="nl">
+	<head>
+        <meta charset="utf-8">
+		<title>Pizza bestelling</title>
+		<style>
+            html {
+                padding: 1em;
+                font-family: Arial, serif;
+                color: #333;
+            }
+
+            h1 {
+                margin-bottom: .1em;
+            }
+
+            table {
+                border-collapse: collapse;
+                margin-bottom: 300px;
+            }
+
+            th {
+                text-align: left;
+            }
+
+            td {
+                width: 300px;
+                text-align: left;
+                border: 1px solid #333;
+            }
+		</style>
+	</head>
+	<body>
+		<h1>1. Pizza keuze</h1>
+		<hr />
+        <form method="post" action="{{ path('order_store') }}">
+            <label for="pizzeria">Pizzeria: </label>
+			<select id="pizzeria" name="name">
+				{% for pizza in pizzas %}
+				<option value="{{ pizza.id }}">{{ pizza.name }}</option>
+				{% endfor %}
+			</select>
+            <label for="bodem" name="bodem">Bodem: </label><select id="bodem"><option>Classic</option><option>Cheesy Crust</option></select>
+            <label for="topping" name="topping">Topping: </label><select id="topping"><option>Hawaii</option><option>Hot & Spicy</option></select>
+            <button type="submit">Plaats bestelling &raquo;</button>
+        </form>
+
+		<h1>2. Bestellingen</h1>
+		<hr />
+		<table>
+			<thead>
+				<tr>
+					<th>Pizza</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+</html>
