@@ -19,4 +19,9 @@ class PizzaDoctrineRepository implements PizzaRepositoryInterface
     {
         return $this->driver->findAll();
     }
+
+    public function findById($pizzaId)
+    {
+        return $this->driver->findOneBy(['id' => $pizzaId]);
+    }
 }

@@ -35,13 +35,13 @@
 		<hr />
         <form method="post" action="{{ path('order_store') }}">
             <label for="pizzeria">Pizzeria: </label>
-			<select id="pizzeria" name="name">
+			<select id="pizzeria" name="pizza_id">
 				{% for pizza in pizzas %}
 				<option value="{{ pizza.id }}">{{ pizza.name }}</option>
 				{% endfor %}
 			</select>
-            <label for="bodem" name="bodem">Bodem: </label><select id="bodem"><option>Classic</option><option>Cheesy Crust</option></select>
-            <label for="topping" name="topping">Topping: </label><select id="topping"><option>Hawaii</option><option>Hot & Spicy</option></select>
+            <label for="bodem">Bodem: </label><select name="bodem" id="bodem"><option>Classic</option><option>Cheesy Crust</option></select>
+            <label for="topping">Topping: </label><select name="topping" id="topping"><option>Hawaii</option><option>Hot & Spicy</option></select>
             <button type="submit">Plaats bestelling &raquo;</button>
         </form>
 

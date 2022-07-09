@@ -27,4 +27,4 @@ services:
         autowire: true
 
     App\Contract\PizzaRepositoryInterface:
-        alias: App\Repository\Pizza\PizzaArrayRepository
+        alias: App\Repository\Pizza\PizzaDoctrineRepository

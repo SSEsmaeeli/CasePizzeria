@@ -29,9 +29,12 @@ class OrderController extends  AbstractController
         return $this->render('client/order_index.html.twig', compact('pizzas'));
     }
 
+    /**
+     * @throws \Exception
+     */
     public function store(Request $request, OrderSaver $orderSaver)
     {
-        $orderSaver->setData($request)
+        $orderSaver->prepare($request)
             ->validate()
             ->handle();
 

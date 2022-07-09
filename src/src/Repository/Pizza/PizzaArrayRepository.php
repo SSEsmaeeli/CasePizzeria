@@ -21,6 +21,11 @@ class PizzaArrayRepository implements PizzaRepositoryInterface
         return $this->getData();
     }
 
+    public function findById($pizzaId)
+    {
+
+    }
+
     private function getData(): array
     {
         return $this->data;

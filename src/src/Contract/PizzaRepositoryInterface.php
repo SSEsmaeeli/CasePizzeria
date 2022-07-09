@@ -7,4 +7,6 @@ namespace App\Contract;
 interface PizzaRepositoryInterface
 {
     public function get(): array;
+
+    public function findById($pizzaId);
 }
