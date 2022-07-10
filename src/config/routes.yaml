@@ -7,3 +7,13 @@ order_store:
     path: /
     controller: App\Controller\OrderController::store
     methods:    POST
+
+admin_order_index:
+    path: /orders
+    controller: App\Controller\OrderController::adminIndex
+    methods:    GET|HEAD
+
+order_update_status:
+    path: /orders/{id}
+    controller: App\Controller\OrderController::updateStatus
+    methods:    POST

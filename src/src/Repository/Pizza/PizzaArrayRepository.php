@@ -9,10 +9,16 @@ class PizzaArrayRepository implements PizzaRepositoryInterface
     private $data = [
         [
             'id' => 1,
-            'name' => 'Dominosssss'
+            'name' => 'Dominos'
         ],[
             'id' => 2,
-            'name' => 'New York Pizzaa'
+            'name' => 'New York Pizza'
+        ],[
+            'id' => 3,
+            'name' => 'Pepperoni Pizza'
+        ],[
+            'id' => 4,
+            'name' => 'Meat Pizza'
         ]
     ];
 
@@ -21,9 +27,9 @@ class PizzaArrayRepository implements PizzaRepositoryInterface
         return $this->getData();
     }
 
-    public function findById($pizzaId)
+    public function findById($pizzaId): array
     {
-
+        return $this->getData()[0];
     }
 
     private function getData(): array
