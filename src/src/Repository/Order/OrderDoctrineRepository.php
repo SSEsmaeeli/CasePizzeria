@@ -28,4 +28,14 @@ class OrderDoctrineRepository implements OrderRepositoryInterface
         $this->entityManager->persist($order);
         $this->entityManager->flush();
     }
+
+    public function update(): void
+    {
+        $this->entityManager->flush();
+    }
+
+    public function findById($orderId)
+    {
+        return $this->driver->findOneBy(['id' => $orderId]);
+    }
 }

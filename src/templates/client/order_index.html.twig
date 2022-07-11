@@ -55,10 +55,12 @@
 				</tr>
 			</thead>
 			<tbody>
+				{% for order in orders %}
 				<tr>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
+					<td>{{ order.pizza.name }}({{ order.bodem }}-{{ order.topping }})</td>
+					<td>{{ order.status }}&nbsp;</td>
 				</tr>
+				{% endfor %}
 			</tbody>
 		</table>
 	</body>

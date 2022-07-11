@@ -51,7 +51,11 @@
                         <form method="post" action="{{ path('order_update_status', {'id': order.id}) }}">
                             <select title="status" name="status">
                                 {% for status in orderAvailableStatus %}
-                                    <option>{{ status.value }}</option>
+                                    {% set selected = '' %}
+                                    {% if (status.value == order.status) %}
+                                       {% set selected = 'selected' %}
+                                    {% endif %}
+                                    <option {{ selected }}>{{ status.value }}</option>
                                 {% endfor %}
                             </select>
                             <button type="submit">Wijzig status</button>

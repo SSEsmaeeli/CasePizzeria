@@ -7,6 +7,7 @@ namespace App\Order;
 use App\Contract\OrderRepositoryInterface;
 use App\Contract\PizzaRepositoryInterface;
 use App\Entity\Order;
+use App\Enum\OrderStatus;
 use App\Repository\OrderRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -38,6 +39,7 @@ class OrderSaver
         $order = new Order();
         $order->setBodem($request->get('bodem'));
         $order->setTopping($request->get('topping'));
+        $order->setStatus(OrderStatus::BestellingOntvangen->value);
         $order->setPizza($this->getPizzaInstance($request->get('pizza_id')));
         $this->order = $order;
         return $this;
@@ -48,7 +50,9 @@ class OrderSaver
         $errors = $this->validator->validate($this->order);
 
         if(count($errors)) {
-            throw new \Exception('Whoops, Something is wrong');
+            throw new \Exception(
+                (string) $errors
+            );
         }
 
         return $this;

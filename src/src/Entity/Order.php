@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\OrderRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
 #[ORM\Table(name: '`order`')]
@@ -16,13 +17,28 @@ class Order
 
     #[ORM\ManyToOne(targetEntity: Pizza::class, inversedBy: 'orders')]
     #[ORM\JoinColumn(nullable: false)]
+    /**
+     * @Assert\NotBlank
+     */
     private $pizza;
 
+    /**
+     * @Assert\NotBlank
+     */
     #[ORM\Column(type: 'string', length: 255)]
     private $bodem;
 
+    /**
+     * @Assert\NotBlank
+     */
     #[ORM\Column(type: 'string', length: 255)]
     private $topping;
+
+    /**
+     * @Assert\NotBlank
+     */
+    #[ORM\Column(type: 'string', length: 255)]
+    private $status;
 
     public function getId(): ?int
     {
@@ -61,6 +77,18 @@ class Order
     public function setTopping(string $topping): self
     {
         $this->topping = $topping;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
