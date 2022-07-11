@@ -3,6 +3,7 @@
 namespace App\Order;
 
 use App\Contract\OrderRepositoryInterface;
+use App\Validator\OrderValidator;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class OrderStatusUpdater
@@ -51,15 +52,13 @@ class OrderStatusUpdater
         return $this;
     }
 
+    /**
+     * @throws \Exception
+     */
     private function validate(): static
     {
-        $errors = $this->validator->validate($this->order);
-
-        if (count($errors) > 0) {
-            throw new \Exception(
-                'Whoops... Something is wrong!'
-            );
-        }
+        (new OrderValidator($this->validator, $this->order))
+            ->validate();
 
         return $this;
     }

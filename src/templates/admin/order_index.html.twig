@@ -55,7 +55,7 @@
                                     {% if (status.value == order.status) %}
                                        {% set selected = 'selected' %}
                                     {% endif %}
-                                    <option {{ selected }}>{{ status.value }}</option>
+                                    <option {{ selected }}>{{ status.value }}-a</option>
                                 {% endfor %}
                             </select>
                             <button type="submit">Wijzig status</button>
