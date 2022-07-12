@@ -8,18 +8,14 @@ use App\Contract\OrderRepositoryInterface;
 use App\Contract\PizzaRepositoryInterface;
 use App\Enum\OrderStatus;
 use App\Order\OrderSaver;
-use App\Order\OrderStatusUpdater;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Service\OrderUpdaterService;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use App\Traits\OrderStatusUpdateEventTrigger;
 
 class OrderController extends  AbstractController
 {
-    use OrderStatusUpdateEventTrigger;
-
     public function index(PizzaRepositoryInterface $pizzaRepository, OrderRepositoryInterface $orderRepository): Response
     {
         $pizzas = $pizzaRepository->get();
@@ -50,14 +46,10 @@ class OrderController extends  AbstractController
     /**
      * @throws \Exception
      */
-    public function updateStatus(Request $request, OrderStatusUpdater $orderStatusUpdater): RedirectResponse
+    public function updateStatus(Request $request, OrderUpdaterService $orderUpdaterService): RedirectResponse
     {
-        $order = $orderStatusUpdater->handle(
-            $request->get('id'),
-            $request->get('status')
-        )->getOrder();
-
-        $this->triggerOrderStatusUpdate($order);
+        $orderUpdaterService->setRequest($request)
+            ->handle();
 
         return $this->redirectToRoute('admin_order_index');
     }
