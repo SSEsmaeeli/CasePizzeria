@@ -35,6 +35,13 @@ class OrderStatusUpdater
         $this->prepare()
             ->validate()
             ->execute();
+
+        return $this;
+    }
+
+    public function getOrder()
+    {
+        return $this->order;
     }
 
     private function prepare(): static

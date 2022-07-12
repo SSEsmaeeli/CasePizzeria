@@ -14,9 +14,12 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use App\Traits\OrderStatusUpdateEventTrigger;
 
 class OrderController extends  AbstractController
 {
+    use OrderStatusUpdateEventTrigger;
+
     public function index(PizzaRepositoryInterface $pizzaRepository, OrderRepositoryInterface $orderRepository): Response
     {
         $pizzas = $pizzaRepository->get();
@@ -49,10 +52,12 @@ class OrderController extends  AbstractController
      */
     public function updateStatus(Request $request, OrderStatusUpdater $orderStatusUpdater): RedirectResponse
     {
-        $orderStatusUpdater->handle(
+        $order = $orderStatusUpdater->handle(
             $request->get('id'),
             $request->get('status')
-        );
+        )->getOrder();
+
+        $this->triggerOrderStatusUpdate($order);
 
         return $this->redirectToRoute('admin_order_index');
     }
