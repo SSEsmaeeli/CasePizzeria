@@ -39,7 +39,7 @@ class OrderSaver
         $order = new Order();
         $order->setBodem($request->get('bodem'));
         $order->setTopping($request->get('topping'));
-        $order->setStatus(OrderStatus::BestellingOntvangen->value);
+        $order->setStatus(OrderStatus::BESTELLING_ONTVANGEN->value);
         $order->setPizza($this->getPizzaInstance($request->get('pizza_id')));
         $this->order = $order;
         return $this;

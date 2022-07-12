@@ -4,9 +4,9 @@ namespace App\Enum;
 
 enum OrderStatus: string
 {
-    case BestellingOntvangen = 'Bestelling ontvangen';
-    case PizzaVoorbereid = 'Pizza voorbereid';
-    case InDeOven = 'In de oven';
-    case BezorgerOnderweg = 'Bezorger onderweg';
-    case Afgeleverd = 'Afgeleverd';
+    case BESTELLING_ONTVANGEN = 'Bestelling ontvangen';
+    case PIZZA_VOORBEREID = 'Pizza voorbereid';
+    case IN_DE_OVEN = 'In de oven';
+    case BEZORGER_ONDERWEG = 'Bezorger onderweg';
+    case AFGELEVERD = 'Afgeleverd';
 }
