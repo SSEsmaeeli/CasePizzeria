@@ -38,13 +38,13 @@ class OrderController extends  AbstractController
     /**
      * @throws \Exception
      */
-    public function store(Request $request, OrderSaver $orderSaver): JsonResponse
+    public function store(Request $request, OrderSaver $orderSaver): RedirectResponse
     {
         $orderSaver->prepare($request)
             ->validate()
             ->handle();
 
-        return $this->json('done!');
+        return $this->redirectToRoute('order_index');
     }
 
     /**
