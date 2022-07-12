@@ -48,7 +48,7 @@
                     <td>{{ order.pizza.name }}</td>
                     <td>{{ order.topping }}</td>
                     <td>{{ order.topping }}</td>
-                    <td>{{ order.pizza.getDeliveryType() }}</td>
+                    <td>{{ order.pizza.deliveryType }}</td>
                     <td>
                         <form method="post" action="{{ path('order_update_status', {'id': order.id}) }}">
                             <select title="status" name="status">

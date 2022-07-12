@@ -51,6 +51,7 @@
 			<thead>
 				<tr>
 					<th>Pizza</th>
+					<th>Delivery Type</th>
 					<th>Status</th>
 				</tr>
 			</thead>
@@ -58,6 +59,7 @@
 				{% for order in orders %}
 				<tr>
 					<td>{{ order.pizza.name }}({{ order.bodem }}-{{ order.topping }})</td>
+					<td>{{ order.pizza.deliveryType }}</td>
 					<td>{{ order.status }}&nbsp;</td>
 				</tr>
 				{% endfor %}
