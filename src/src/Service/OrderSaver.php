@@ -2,14 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Order;
+namespace App\Service;
 
 use App\Contract\OrderRepositoryInterface;
 use App\Contract\PizzaRepositoryInterface;
 use App\Entity\Order;
 use App\Enum\OrderStatus;
-use App\Repository\OrderRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class OrderSaver

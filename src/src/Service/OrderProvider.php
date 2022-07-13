@@ -1,11 +1,9 @@
 <?php
 
-namespace App\Order;
+namespace App\Service;
 
 use App\Contract\OrderRepositoryInterface;
 use App\Entity\Order;
-use App\Validator\OrderValidator;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class OrderProvider
 {

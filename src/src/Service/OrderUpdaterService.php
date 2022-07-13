@@ -2,8 +2,6 @@
 
 namespace App\Service;
 
-use App\Order\OrderProvider;
-use App\Order\OrderStatusUpdater;
 use App\Traits\OrderStatusUpdateEventTrigger;
 use App\Validator\OrderValidator;
 use Symfony\Component\HttpFoundation\Request;

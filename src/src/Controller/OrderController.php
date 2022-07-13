@@ -7,11 +7,11 @@ namespace App\Controller;
 use App\Contract\OrderRepositoryInterface;
 use App\Contract\PizzaRepositoryInterface;
 use App\Enum\OrderStatus;
-use App\Order\OrderSaver;
+use App\Service\OrderSaver;
 use App\Service\OrderUpdaterService;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
 class OrderController extends  AbstractController

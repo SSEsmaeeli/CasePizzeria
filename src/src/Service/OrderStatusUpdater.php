@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Order;
+namespace App\Service;
 
 use App\Contract\OrderRepositoryInterface;
 
