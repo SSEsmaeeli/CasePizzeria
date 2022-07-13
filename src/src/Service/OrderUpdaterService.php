@@ -40,6 +40,8 @@ class OrderUpdaterService
             ->validate();
 
         $this->orderStatusUpdater->handle();
+
+        $this->triggerOrderStatusUpdate($order);
     }
 
     public function setRequest(Request $request): static
