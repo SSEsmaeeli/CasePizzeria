@@ -32,10 +32,9 @@ class OrderUpdaterService
      */
     public function handle(): void
     {
-        $order = $this->orderProvider->setData(
-            $this->request->get('id'),
-            $this->request->get('status')
-        )->prepare()->getOrder();
+        $order = $this->orderProvider->findOrder($this->request->get('id'))
+            ->setOrderStatus($this->request->get('status'))
+            ->getOrder();
 
         (new OrderValidator($this->validator, $order))
             ->validate();

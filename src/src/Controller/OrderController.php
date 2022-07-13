@@ -7,12 +7,15 @@ namespace App\Controller;
 use App\Contract\OrderRepositoryInterface;
 use App\Contract\PizzaRepositoryInterface;
 use App\Enum\OrderStatus;
+use App\Service\OrderProvider;
 use App\Service\OrderSaver;
 use App\Service\OrderUpdaterService;
+use App\Validator\OrderValidator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class OrderController extends  AbstractController
 {
@@ -34,11 +37,15 @@ class OrderController extends  AbstractController
     /**
      * @throws \Exception
      */
-    public function store(Request $request, OrderSaver $orderSaver): RedirectResponse
+    public function store(Request $request, OrderSaver $orderSaver, OrderProvider $orderProvider, ValidatorInterface $validator): RedirectResponse
     {
-        $orderSaver->prepare($request)
-            ->validate()
-            ->handle();
+        $order = $orderProvider->createOrder($request)
+            ->getOrder();
+
+        (new OrderValidator($validator, $order))
+            ->validate();
+
+        $orderSaver->handle($order);
 
         return $this->redirectToRoute('order_index');
     }
