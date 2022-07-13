@@ -9,4 +9,5 @@ enum OrderStatus: string
     case IN_DE_OVEN = 'In de oven';
     case BEZORGER_ONDERWEG = 'Bezorger onderweg';
     case AFGELEVERD = 'Afgeleverd';
+    case CANCELLED = 'Cancelled';
 }

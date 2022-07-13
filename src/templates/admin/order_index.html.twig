@@ -35,9 +35,8 @@
     <table>
         <thead>
             <tr>
-                <th>Pizza</th>
-                <th>Bodem</th>
-                <th>Topping</th>
+                <th>Pizza(Bodem-Topping)</th>
+                <th>Status</th>
                 <th>Delivery Type</th>
                 <th>Status</th>
             </tr>
@@ -45,22 +44,23 @@
         <tbody>
             {%  for order in orders %}
                 <tr>
-                    <td>{{ order.pizza.name }}</td>
-                    <td>{{ order.topping }}</td>
-                    <td>{{ order.topping }}</td>
+                    <td>{{ order.pizza.name }}({{ order.bodem }}-{{ order.topping }})</td>
+                    <td>{{ order.status }}</td>
                     <td>{{ order.pizza.deliveryType }}</td>
                     <td>
                         <form method="post" action="{{ path('order_update_status', {'id': order.id}) }}">
+                            {% if(order.getActions()) %}
                             <select title="status" name="status">
-                                {% for status in orderAvailableStatus %}
+                                {% for status in order.getActions() %}
                                     {% set selected = '' %}
-                                    {% if (status.value == order.status) %}
+                                    {% if (status == order.status) %}
                                        {% set selected = 'selected' %}
                                     {% endif %}
-                                    <option {{ selected }}>{{ status.value }}</option>
+                                    <option {{ selected }}>{{ status }}</option>
                                 {% endfor %}
                             </select>
                             <button type="submit">Wijzig status</button>
+                            {% endif %}
                         </form>
                     </td>
                 </tr>

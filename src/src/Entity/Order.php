@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\OrderRepository;
+use App\Service\OrderStatusHandler;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -10,6 +11,16 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Table(name: '`order`')]
 class Order
 {
+    private OrderStatusHandler $orderStatusHandler;
+    private array $actions = [];
+    private $next;
+
+    public function __construct(OrderStatusHandler $orderStatusHandler)
+    {
+        $this->orderStatusHandler = $orderStatusHandler;
+        $this->setStatusStuff();
+    }
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
@@ -91,5 +102,33 @@ class Order
         $this->status = $status;
 
         return $this;
+    }
+
+    public function getNext()
+    {
+        return $this->next;
+    }
+
+    public function getActions(): array
+    {
+        return $this->actions;
+    }
+
+    public function setStatusStuff()
+    {
+        $this->orderStatusHandler = new OrderStatusHandler();
+        $this->orderStatusHandler->setStatus($this->getStatus());
+        $this->actions = $this->generateActions();
+        $this->next = $this->generateNext();
+    }
+
+    public function generateActions(): array
+    {
+        return $this->orderStatusHandler->getStatusInstance()->actions();
+    }
+
+    public function generateNext()
+    {
+        return $this->orderStatusHandler->getStatusInstance()->next();
     }
 }

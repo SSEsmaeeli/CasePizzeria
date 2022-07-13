@@ -29,9 +29,8 @@ class OrderController extends  AbstractController
 
     public function adminIndex(OrderRepositoryInterface $orderRepository): Response
     {
-        $orderAvailableStatus = OrderStatus::cases();
         $orders = $orderRepository->get();
-        return $this->render('admin/order_index.html.twig', compact('orderAvailableStatus', 'orders'));
+        return $this->render('admin/order_index.html.twig', compact('orders'));
     }
 
     /**

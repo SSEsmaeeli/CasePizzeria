@@ -5,10 +5,11 @@ namespace App\Repository\Order;
 use App\Contract\OrderRepositoryInterface;
 use App\Entity\Order;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ObjectManager;
 
 class OrderDoctrineRepository implements OrderRepositoryInterface
 {
-    private $entityManager;
+    private ObjectManager $entityManager;
 
     private $driver;
 
@@ -20,7 +21,13 @@ class OrderDoctrineRepository implements OrderRepositoryInterface
 
     public function get(): array
     {
-        return $this->driver->findAll();
+        $orders = $this->driver->findAll();
+
+        foreach($orders as $order) {
+            $order->setStatusStuff();
+        }
+
+        return $orders;
     }
 
     public function store(Order $order): void
@@ -36,6 +43,8 @@ class OrderDoctrineRepository implements OrderRepositoryInterface
 
     public function findById($orderId)
     {
-        return $this->driver->findOneBy(['id' => $orderId]);
+        $order = $this->driver->findOneBy(['id' => $orderId]);
+        $order->setStatusStuff();
+        return $order;
     }
 }
