@@ -37,7 +37,7 @@ class OrderController extends  AbstractController
     /**
      * @throws \Exception
      */
-    public function store(Request $request, OrderSaver $orderSaver, OrderProvider $orderProvider, ValidatorInterface $validator): RedirectResponse
+    public function store(Request $request, ValidatorInterface $validator, OrderProvider $orderProvider, OrderSaver $orderSaver): RedirectResponse
     {
         $order = $orderProvider->createOrder($request)
             ->getOrder();
