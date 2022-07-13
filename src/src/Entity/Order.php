@@ -13,7 +13,7 @@ class Order
 {
     private OrderStatusHandler $orderStatusHandler;
     private array $actions = [];
-    private $next;
+    private string $next;
 
     public function __construct(OrderStatusHandler $orderStatusHandler)
     {
@@ -104,7 +104,7 @@ class Order
         return $this;
     }
 
-    public function getNext()
+    public function getNext(): string
     {
         return $this->next;
     }
