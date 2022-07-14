@@ -15,12 +15,6 @@ class Order
     private array $actions = [];
     private string $next;
 
-    public function __construct(OrderStatusHandler $orderStatusHandler)
-    {
-        $this->orderStatusHandler = $orderStatusHandler;
-        $this->setStatusStuff();
-    }
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]

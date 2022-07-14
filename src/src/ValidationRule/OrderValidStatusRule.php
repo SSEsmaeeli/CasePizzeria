@@ -12,7 +12,7 @@ class OrderValidStatusRule extends OrderBaseRule
     {
         return in_array(
             $this->order->getStatus(),
-            $this->getAvailableActions()
+            $this->order->getId() ? $this->getAvailableActions() : $this->getAllActions()
         );
 
         // old method (Non-Sequential):
