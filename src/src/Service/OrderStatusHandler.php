@@ -11,6 +11,8 @@ use App\OrderStatus\PizzaVoorbereid;
 
 class OrderStatusHandler
 {
+    const STATUS_NOT_VALID = 'Status is not valid';
+
     const STATUS_MAP = [
         Afgeleverd::VALUE => Afgeleverd::class,
         BestellingOntvangen::VALUE => BestellingOntvangen::class,
@@ -38,7 +40,8 @@ class OrderStatusHandler
 
     private function getClass()
     {
-        $statusClassName = self::STATUS_MAP[$this->status];
+        $statusClassName = self::STATUS_MAP[$this->status] ?? throw new \Exception(self::STATUS_NOT_VALID);
+
         $this->statusInstance = (new $statusClassName);
     }
 }
